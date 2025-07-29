@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.INFO,format='[%(asctime)s]:  %(message)s:')
 
 
 #**you can modefy the name of the project**
-project_name = "CNN Classifier"
+project_name = "cnn_Classifier"
 
 list_of_files = [
 
@@ -26,7 +26,7 @@ list_of_files = [
     "requirements.txt",
     "setup.py",
     "research/trails.ipynb",
-    "test.py"
+    "templates/index.html"    
 
 ]
 
