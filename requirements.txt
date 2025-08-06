@@ -15,4 +15,5 @@ types-PyYAML
 scipy
 flask
 flask-cors
+gdown
 -e .
