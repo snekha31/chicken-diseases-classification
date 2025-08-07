@@ -4,6 +4,7 @@ data_ingestion:
   source_URL: 1k2H549BKVQKwcUXpL_K3I8FXEQ5F5Ljm
   local_data_file: artifacts/data_ingestion/data.zip
   unzip_dir: artifacts/data_ingestion
+  image_folder_name: Ckn_fecal_images
 
 prepare_base_model:
   root_dir: artifacts/prepare_base_model
@@ -16,3 +17,8 @@ prepare_callbacks:
   root_dir: artifacts/prepare_callbacks
   tensorboard_root_log_dir: artifacts/prepare_callbacks/tensorboard_log_dir
   checkpoint_model_filepath: artifacts/prepare_callbacks/checkpoint_dir/model.h5
+
+training:
+  root_dir: artifacts/training 
+  trained_model_path: artifacts/training/model.h5 
+  
