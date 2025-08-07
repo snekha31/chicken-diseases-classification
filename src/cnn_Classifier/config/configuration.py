@@ -1,8 +1,11 @@
 from cnn_Classifier.constants import *
 from cnn_Classifier.utils.common import read_yaml, create_directories
+from pathlib import Path
 from cnn_Classifier.entity.config_entity import (DataIngestionConfig,
-                                                PrepareBaseModelConfig, PrepareCallbacksConfig,
-                                                TrainingConfig)
+                                                PrepareBaseModelConfig, 
+                                                PrepareCallbacksConfig,
+                                                TrainingConfig,
+                                                EvaluationConfig)
 import os
 
 class ConfigurationManager:
@@ -34,22 +37,23 @@ class ConfigurationManager:
     
     def get_prepare_base_model_config(self) -> PrepareBaseModelConfig:
         config = self.config.prepare_base_model
-        
         create_directories([config.root_dir])
+
+        training_params = self.params.training
 
         prepare_base_model_config = PrepareBaseModelConfig(
             root_dir=Path(config.root_dir),
             base_model_path=Path(config.base_model_path),
             updated_base_model_path=Path(config.updated_base_model_path),
-            params_image_size=self.params.IMAGE_SIZE,
-            params_learning_rate=self.params.LEARNING_RATE,
-            params_include_top=self.params.INCLUDE_TOP,
-            params_weights=self.params.WEIGHTS,
-            params_classes=self.params.CLASSES
+            params_image_size=training_params.IMAGE_SIZE,
+            params_learning_rate=training_params.LEARNING_RATE,
+            params_include_top=training_params.INCLUDE_TOP,
+            params_weights=training_params.WEIGHTS,
+            params_classes=training_params.CLASSES
         )
 
         return prepare_base_model_config
-      
+
 
    
     def get_prepare_callback_config(self) -> PrepareCallbacksConfig:
@@ -85,9 +89,19 @@ class ConfigurationManager:
             training_data=Path(training_data),
             params_epochs=params.EPOCHS,
             params_batch_size=params.BATCH_SIZE,
-            params_is_augmentation=params.AUGUMENTATION,
+            params_is_augmentation=params.AUGMENTATION,
             params_image_size=params.IMAGE_SIZE,
             params_learning_rate=params.LEARNING_RATE 
         )
 
         return training_config   
+     
+    def get_validation_config(self) -> EvaluationConfig:
+        eval_config = EvaluationConfig(
+            path_of_model= Path("artifacts/training/model.h5"),
+            training_data=Path("artifacts/data_ingestion/Ckn_fecal_images"),
+            all_params=self.params,
+            params_image_size=self.params.training.IMAGE_SIZE,
+            params_batch_size=self.params.training.BATCH_SIZE
+        )
+        return eval_config
