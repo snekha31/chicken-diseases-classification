@@ -1,10 +1,10 @@
 
 training:
   AUGMENTATION: True
-  IMAGE_SIZE: [224, 224, 3]
+  IMAGE_SIZE: [128, 128, 3]
   BATCH_SIZE: 16
   INCLUDE_TOP: False
-  EPOCHS: 1
+  EPOCHS: 5
   CLASSES: 2
   WEIGHTS: imagenet
   LEARNING_RATE: 0.01
